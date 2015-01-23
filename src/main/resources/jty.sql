@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50541
 File Encoding         : 65001
 
-Date: 2015-01-16 14:11:46
+Date: 2015-01-23 11:06:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for adver
+-- ----------------------------
+DROP TABLE IF EXISTS `adver`;
+CREATE TABLE `adver` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) NOT NULL,
+  `IMG` varchar(255) NOT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  `SORT` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of adver
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for dict
@@ -38,6 +55,61 @@ INSERT INTO `dict` VALUES ('1', '正常', '0', 'user', '用户状态', '1', null
 INSERT INTO `dict` VALUES ('2', '禁用', '1', 'user', '用户状态', '2', null, null);
 INSERT INTO `dict` VALUES ('4', '普通用户', '0', 'user', '用户类型', null, null, null);
 INSERT INTO `dict` VALUES ('5', '会员用户', '1', 'user', '用户类型', null, null, null);
+
+-- ----------------------------
+-- Table structure for goods
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) NOT NULL,
+  `COVER` varchar(255) NOT NULL,
+  `IMG` varchar(255) NOT NULL,
+  `TYPE_ID` int(11) NOT NULL,
+  `PRICE` double NOT NULL COMMENT '标价',
+  `MARKET_PRICE` double DEFAULT NULL COMMENT '市场价',
+  `INTRODUCE` varchar(255) DEFAULT NULL COMMENT '介绍',
+  `BRIEF` varchar(255) DEFAULT NULL COMMENT '摘要',
+  `IS_SOLD` char(255) DEFAULT NULL COMMENT '是否上架',
+  `SALES` int(11) DEFAULT NULL COMMENT '销量',
+  `POSTAGE` double DEFAULT NULL COMMENT '邮费',
+  `PV` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_GOODS_TYPE_ID` (`TYPE_ID`),
+  CONSTRAINT `FK_GOODS_TYPE_ID` FOREIGN KEY (`TYPE_ID`) REFERENCES `goods_type` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
+INSERT INTO `goods` VALUES ('1', 'aaa', 'aaa', 'aaa', '1', '11', '11', '11', '1', '1', '1', '1', '11');
+
+-- ----------------------------
+-- Table structure for goods_type
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_type`;
+CREATE TABLE `goods_type` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PID` int(11) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `IMG` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods_type
+-- ----------------------------
+INSERT INTO `goods_type` VALUES ('1', null, '男装·女装', null);
+INSERT INTO `goods_type` VALUES ('2', null, '鞋靴·箱包', null);
+INSERT INTO `goods_type` VALUES ('3', null, '手机·数码', null);
+INSERT INTO `goods_type` VALUES ('4', null, '家电·办公', null);
+INSERT INTO `goods_type` VALUES ('5', '1', '男上衣', 'aaa');
+INSERT INTO `goods_type` VALUES ('6', '1', '男裤', null);
+INSERT INTO `goods_type` VALUES ('7', '1', '男内衣', null);
+INSERT INTO `goods_type` VALUES ('8', '1', '女裤', null);
+INSERT INTO `goods_type` VALUES ('9', '3', '笔记本', null);
+INSERT INTO `goods_type` VALUES ('10', '3', '台式机', null);
+INSERT INTO `goods_type` VALUES ('11', '4', '电视', null);
 
 -- ----------------------------
 -- Table structure for log
@@ -87,7 +159,7 @@ CREATE TABLE `permission` (
   `STATE` varchar(10) DEFAULT NULL,
   `DESCRIPTION` text,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
@@ -130,6 +202,9 @@ INSERT INTO `permission` VALUES ('63', '40', '修改', 'O', null, '', 'sys:dict:
 INSERT INTO `permission` VALUES ('68', '20', '查看', 'O', null, '', 'sys:log:view', null, null, '查看日志');
 INSERT INTO `permission` VALUES ('69', '40', '查看', 'O', null, '', 'sys:dict:view', null, null, '字典管理');
 INSERT INTO `permission` VALUES ('70', '39', '查看', 'O', null, '', 'sys:perm:menu:view', null, null, '菜单管理');
+INSERT INTO `permission` VALUES ('71', null, '商店管理', 'F', null, '', null, 'icon-hamburg-basket', null, '商店');
+INSERT INTO `permission` VALUES ('72', '71', '商品管理', 'F', null, 'shop/goods', null, 'icon-hamburg-product', null, '商品管理');
+INSERT INTO `permission` VALUES ('73', '71', '商品类型管理', 'F', null, 'shop/goodsType', null, 'icon-hamburg-milestone', null, '商品类型');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -275,7 +350,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'tianyu-pc1421376050869', '1421382311627', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'tianyu-pc1421978770122', '1421978770298', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -388,7 +463,7 @@ CREATE TABLE `role_permission` (
   KEY `FK_ROLE_PER_REFERENCE_ROLE` (`ROLE_ID`) USING BTREE,
   CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`PERMISSION_ID`) REFERENCES `permission` (`ID`),
   CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_permission
@@ -485,6 +560,9 @@ INSERT INTO `role_permission` VALUES ('235', '5', '45');
 INSERT INTO `role_permission` VALUES ('236', '5', '59');
 INSERT INTO `role_permission` VALUES ('239', '5', '36');
 INSERT INTO `role_permission` VALUES ('240', '1', '68');
+INSERT INTO `role_permission` VALUES ('241', '1', '71');
+INSERT INTO `role_permission` VALUES ('242', '1', '72');
+INSERT INTO `role_permission` VALUES ('243', '1', '73');
 
 -- ----------------------------
 -- Table structure for user
@@ -514,7 +592,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'admin', '159ae5f48f14e89f3f9f54dc995f1f276d472b54', '3d06a5c14d010804', '2014-03-16 22:44:39', '1', '779205344@qq.com', '123456789', 'aaa', '2014-03-20 14:38:57', '0', null, '129', '2015-01-16 10:22:19', '2015-01-16 10:24:21', null);
+INSERT INTO `user` VALUES ('1', 'admin', 'admin', '159ae5f48f14e89f3f9f54dc995f1f276d472b54', '3d06a5c14d010804', '2014-03-16 22:44:39', '1', '779205344@qq.com', '123456789', 'aaa', '2014-03-20 14:38:57', '0', null, '131', '2015-01-22 15:51:46', '2015-01-22 16:49:13', null);
 INSERT INTO `user` VALUES ('3', 'tianyu', 'tiany', '1e8df4b59b3a3ab452ed1707ad3cb1a8e63a0630', 'bb2aa40007ad1238', '2014-04-02 00:00:00', '0', '', '300', '', '2014-04-02 11:49:13', '0', null, null, null, null, null);
 INSERT INTO `user` VALUES ('5', 'test', 'tyty11', 'dc6d230074477c8d736bfe0205260e9320565aa6', '94886d7223c80850', '2014-12-05 00:00:00', '1', '', '', null, '2014-12-05 11:55:03', '1', 'ss', '1', null, '2014-12-14 00:09:27', null);
 INSERT INTO `user` VALUES ('6', 'superadmin', '超级管理员', 'df894ac0dd60772f22b5d67fe5d8b04fb4c9188d', '97efb48ee6adff63', '2015-01-15 00:00:00', '1', '779205344@qq.com', '13721035120', null, '2015-01-15 15:55:37', null, '超级管理员', null, null, null, null);
