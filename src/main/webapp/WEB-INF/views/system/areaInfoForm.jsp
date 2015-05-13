@@ -8,22 +8,24 @@
 </head>
 <body>
 <div>
-	<form id="mainform" action="${ctx}/shop/goodsType/${action}" method="post">
+	<form id="mainform" action="${ctx}/system/area/${action}" method="post">
 	<table  class="formTable">
 		<tr>
-			<td>类型名称：</td>
+			<td>区域名称：</td>
 			<td>
-			<input type="hidden" name="id" value="${id }" />
-			<input name="name" type="text" value="${goodsType.name }" class="easyui-validatebox"  data-options="required:true,validType:['length[0,255]']" />
+			<input type="hidden" name="id" value="${id }" data-options="required:false"/>
+			<input name="areaName" type="text" value="${areaInfo.areaName }" class="easyui-validatebox"  data-options="required:true,validType:['length[0,50]']" />
 			</td>
 		</tr>
 		<tr>
-			<td>上级类型：</td>
-			<td><input id="pid" name="pid" type="text" value="${goodsType.pid }" class="easyui-validatebox" data-options="required:true,validType:['length[0,11]']"/></td>
+			<td>区域代码：</td>
+			<td>
+			<input name="areaCode" type="text" value="${areaInfo.areaCode }" class="easyui-validatebox"  data-options="required:true,validType:['length[0,12]']" />
+			</td>
 		</tr>
 		<tr>
-			<td>图片：</td>
-			<td><input name="img" type="text" value="${goodsType.img}" class="easyui-validatebox" data-options="required:false"/></td>
+			<td>上级区域名称：</td>
+			<td><input id="pid" name="pid" type="text" value="${areaInfo.pid }" class="easyui-validatebox" data-options="required:true,validType:['length[0,9]']" /></td>
 		</tr>
 	</table>
 	</form>
@@ -35,9 +37,9 @@ $(function(){
 	$('#pid').combotree({
 		width:180,
 		method:'GET',
-	    url: '${ctx}/shop/goodsType/json',
+	    url: '${ctx}/system/area/json',
 	    idField : 'id',
-	    textFiled : 'name',
+	    textFiled : 'areaName',
 		parentField : 'pid',
 	    animate:true
 	});  
@@ -45,6 +47,7 @@ $(function(){
 	$('#mainform').form({    
 	    onSubmit: function(){    
 	    	var isValid = $(this).form('validate');
+	    	console.log(isValid);
 			return isValid;	// 返回false终止表单提交
 	    },    
 	    success:function(data){   

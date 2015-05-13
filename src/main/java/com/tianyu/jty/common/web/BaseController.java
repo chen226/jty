@@ -9,12 +9,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import com.tianyu.jty.common.persistence.Page;
 import com.tianyu.jty.common.utils.DateUtils;
 import com.tianyu.jty.common.utils.StringUtils;
+import com.tianyu.jty.system.entity.User;
 
 
 /**
@@ -91,5 +93,16 @@ public class BaseController {
 		map.put("total", page.getTotalCount());
 		return map;
 	}
-
+	
+	/**
+	 * 用来获取当前登录用户
+	 * @return 当前登录用户
+	 */
+	public User getCurUser() {
+		
+		//Object = null;
+		User curUser = (User) SecurityUtils.getSubject().getPrincipal();
+		return curUser;
+	}
+	
 }

@@ -205,6 +205,7 @@ INSERT INTO `permission` VALUES ('70', '39', '查看', 'O', null, '', 'sys:perm:
 INSERT INTO `permission` VALUES ('71', null, '商店管理', 'F', null, '', null, 'icon-hamburg-basket', null, '商店');
 INSERT INTO `permission` VALUES ('72', '71', '商品管理', 'F', null, 'shop/goods', null, 'icon-hamburg-product', null, '商品管理');
 INSERT INTO `permission` VALUES ('73', '71', '商品类型管理', 'F', null, 'shop/goodsType', null, 'icon-hamburg-milestone', null, '商品类型');
+INSERT INTO `permission` VALUES ('74', '1' , '区域信息', 'F', 7, 'system/area', NULL, 'icon-hamburg-world', NULL, '管理行政区划');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -563,6 +564,7 @@ INSERT INTO `role_permission` VALUES ('240', '1', '68');
 INSERT INTO `role_permission` VALUES ('241', '1', '71');
 INSERT INTO `role_permission` VALUES ('242', '1', '72');
 INSERT INTO `role_permission` VALUES ('243', '1', '73');
+INSERT INTO `role_permission` VALUES ('244', '1', '74');
 
 -- ----------------------------
 -- Table structure for user
@@ -620,3 +622,20 @@ INSERT INTO `user_role` VALUES ('19', '3', '5');
 INSERT INTO `user_role` VALUES ('32', '5', '5');
 INSERT INTO `user_role` VALUES ('35', '6', '13');
 INSERT INTO `user_role` VALUES ('36', '6', '1');
+-- ----------------------------
+-- Table structure for `area_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `area_info`;
+CREATE TABLE `area_info` (
+  `ID` int(9) NOT NULL AUTO_INCREMENT,
+  `AREA_CODE` varchar(12) DEFAULT NULL,
+  `AREA_NAME` varchar(50) DEFAULT NULL,
+  `PID` int(9) DEFAULT NULL,
+  `SORT` int(3) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of area_info
+-- ----------------------------
+INSERT INTO `area_info` VALUES ('1', '100000', '中国', null, '1');
