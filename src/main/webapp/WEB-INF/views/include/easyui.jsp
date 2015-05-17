@@ -8,6 +8,8 @@
 <link href="${ctx}/static/plugins/easyui/jquery-easyui-theme/<c:out value="${cookie.themeName.value}" default="default"/>/easyui.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/plugins/easyui/jquery-easyui-theme/icon.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/plugins/easyui/icons/icon-all.css" rel="stylesheet" type="text/css" />
+<!-- ztree样式 -->
+<link href="${ctx}/static/plugins/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
 
 <script src="${ctx}/static/plugins/easyui/jquery/jquery-1.11.1.min.js"></script>
 
@@ -55,6 +57,10 @@
 <script src="${ctx}/static/plugins/easyui/jeasyui-extensions/jquery.portal.js" type="text/javascript"></script>
 <script src="${ctx}/static/plugins/easyui/jeasyui-extensions/jquery.my97.js" type="text/javascript"></script>    
 <script src="${ctx}/static/plugins/easyui/jeasyui-extensions/jeasyui.extensions.ty.js"></script>
+
+<!-- ztree扩展 -->
+<script src="${ctx}/static/plugins/ztree/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="${ctx}/static/plugins/ztree/js/jquery.ztree.exhide-3.5.min.js"></script>
 
 <link rel="stylesheet" href="${ctx }/static/plugins/easyui/common/other.css"></link>
 
