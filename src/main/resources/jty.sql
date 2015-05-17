@@ -205,7 +205,10 @@ INSERT INTO `permission` VALUES ('70', '39', '查看', 'O', null, '', 'sys:perm:
 INSERT INTO `permission` VALUES ('71', null, '商店管理', 'F', null, '', null, 'icon-hamburg-basket', null, '商店');
 INSERT INTO `permission` VALUES ('72', '71', '商品管理', 'F', null, 'shop/goods', null, 'icon-hamburg-product', null, '商品管理');
 INSERT INTO `permission` VALUES ('73', '71', '商品类型管理', 'F', null, 'shop/goodsType', null, 'icon-hamburg-milestone', null, '商品类型');
-INSERT INTO `permission` VALUES ('74', '1' , '区域信息', 'F', 7, 'system/area', NULL, 'icon-hamburg-world', NULL, '管理行政区划');
+INSERT INTO `permission` VALUES ('74', '1' , '区域信息', 'F', '7', 'system/area', NULL, 'icon-hamburg-world', NULL, '管理行政区划');
+INSERT INTO `permission` VALUES ('75', '1', '机构管理', 'F', '8', 'system/organization', null, 'icon-cologne-home', null, '组织机构管理');
+INSERT INTO `permission` VALUES ('76', '3', '查看用户机构', 'O', null, '', 'sys:user:orgView', null, null, '查看用户机构');
+INSERT INTO `permission` VALUES ('77', '3', '修改用户机构', 'O', null, '', 'sys:user:orgUpd', null, null, '修改用户所在的机构');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -565,6 +568,9 @@ INSERT INTO `role_permission` VALUES ('241', '1', '71');
 INSERT INTO `role_permission` VALUES ('242', '1', '72');
 INSERT INTO `role_permission` VALUES ('243', '1', '73');
 INSERT INTO `role_permission` VALUES ('244', '1', '74');
+INSERT INTO `role_permission` VALUES ('245', '1', '75');
+INSERT INTO `role_permission` VALUES ('246', '1', '76');
+INSERT INTO `role_permission` VALUES ('247', '1', '77');
 
 -- ----------------------------
 -- Table structure for user
@@ -639,3 +645,41 @@ CREATE TABLE `area_info` (
 -- Records of area_info
 -- ----------------------------
 INSERT INTO `area_info` VALUES ('1', '100000', '中国', null, '1');
+
+-- ----------------------------
+-- Table structure for `organization`
+-- ----------------------------
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE `organization` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `org_name` varchar(255) NOT NULL,
+  `pid` int(9) DEFAULT NULL,
+  `org_type` varchar(255) DEFAULT NULL,
+  `org_sort` int(3) DEFAULT '0',
+  `org_level` int(3) DEFAULT NULL,
+  `org_code` varchar(255) DEFAULT NULL,
+  `area_id` int(9) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of organization
+-- ----------------------------
+INSERT INTO `organization` VALUES ('1', '总部', null, '总部', '1', '1', '000000', null);
+INSERT INTO `organization` VALUES ('2', '12313', '1', '13', '31', '131', '131313', '1');
+
+-- ----------------------------
+-- Table structure for `user_org`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_org`;
+CREATE TABLE `user_org` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `user_id` int(9) NOT NULL,
+  `org_id` int(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_org
+-- ----------------------------
+INSERT INTO `user_org` VALUES ('8', '6', '1');

@@ -13,70 +13,69 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tianyu.jty.common.web.BaseController;
-import com.tianyu.jty.system.entity.AreaInfo;
-import com.tianyu.jty.system.service.AreaInfoService;
+import com.tianyu.jty.system.entity.Organization;
+import com.tianyu.jty.system.service.OrganizationService;
 
 /**
- * 区域信息类型controller
+ * 机构信息controller
  * @author ty
  * @date 2015年1月22日
  */
 @Controller
-@RequestMapping("system/area")
-public class AreaInfoController extends BaseController{
+@RequestMapping("system/organization")
+public class OrganizationController extends BaseController{
 
 	@Autowired
-	private AreaInfoService areaInfoService;
+	private OrganizationService organizationService;
 
 	/**
 	 * 默认页面
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String list() {
-		return "system/areaInfoList";
+		return "system/organization/orgList";
 	}
 	
 	/**
-	 * 获取区域信息类型json
+	 * 获取机构信息json
 	 */
 	@RequestMapping(value="json",method = RequestMethod.GET)
 	@ResponseBody
-	public List<AreaInfo> areaInfoList(HttpServletRequest request) {
-		List<AreaInfo> areaInfoList=areaInfoService.getAll();
-		return areaInfoList;
+	public List<Organization> areaInfoList(HttpServletRequest request) {
+		List<Organization> organizations=organizationService.getAll();
+		return organizations;
 	}
 	
 	/**
-	 * 添加区域信息跳转
+	 * 添加机构信息跳转
 	 * 
 	 * @param model
 	 */
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("areaInfo", new AreaInfo());
+		model.addAttribute("organization", new Organization());
 		model.addAttribute("action", "create");
-		return "system/areaInfoForm";
+		return "system/organization/orgForm";
 	}
 
 	/**
-	 * 添加区域信息
+	 * 添加机构信息
 	 * 
-	 * @param goodsType
+	 * @param organization
 	 * @param model
 	 */
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
-	public String create(@Valid AreaInfo areaInfo, Model model) {
-		areaInfoService.save(areaInfo);
+	public String create(@Valid Organization organization, Model model) {
+		organizationService.save(organization);
 		return "success";
 	}
 
 	/**
-	 * 修改区域信息跳转
+	 * 修改机构信息跳转
 	 * 
 	 * @param id
 	 * @param model
@@ -84,13 +83,13 @@ public class AreaInfoController extends BaseController{
 	 */
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("areaInfo", areaInfoService.get(id));
+		model.addAttribute("organization", organizationService.get(id));
 		model.addAttribute("action", "update");
-		return "system/areaInfoForm";
+		return "system/organization/orgForm";
 	}
 
 	/**
-	 * 修改区域信息
+	 * 修改机构信息
 	 * 
 	 * @param goodsType
 	 * @param model
@@ -98,13 +97,13 @@ public class AreaInfoController extends BaseController{
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	@ResponseBody
-	public String update(@Valid @ModelAttribute @RequestBody AreaInfo areaInfo,Model model) {
-		areaInfoService.update(areaInfo);
+	public String update(@Valid @ModelAttribute @RequestBody Organization organization,Model model) {
+		organizationService.update(organization);
 		return "success";
 	}
 
 	/**
-	 * 删除区域信息
+	 * 删除机构信息
 	 * 
 	 * @param id
 	 * @return
@@ -112,7 +111,7 @@ public class AreaInfoController extends BaseController{
 	@RequestMapping(value = "delete/{id}")
 	@ResponseBody
 	public String delete(@PathVariable("id") Integer id) {
-		areaInfoService.delete(id);
+		organizationService.delete(id);
 		return "success";
 	}
 	

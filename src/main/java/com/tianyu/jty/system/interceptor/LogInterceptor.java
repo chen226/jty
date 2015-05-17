@@ -77,7 +77,7 @@ public class LogInterceptor implements HandlerInterceptor {
 		log.setRequestParam(requestParam);
 		
 		//放到一公共变量里，定时提交
-		//logService.save(log);
+		logService.save(log);
 	}
 
 }

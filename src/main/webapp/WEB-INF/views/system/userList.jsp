@@ -33,6 +33,9 @@
 	        <shiro:hasPermission name="sys:user:roleView">
         		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-hamburg-suppliers" plain="true" onclick="userForRole()">用户角色</a>
         	</shiro:hasPermission>
+        	<shiro:hasPermission name="sys:user:orgView">
+        		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cologne-home" plain="true" onclick="userForOrg()">用户所属机构</a>
+        	</shiro:hasPermission>
         </div> 
         
   </div>
@@ -168,6 +171,32 @@ function userForRole(){
 			text:'确认',
 			handler:function(){
 				saveUserRole();
+				d.panel('close');
+			}
+		},{
+			text:'取消',
+			handler:function(){
+					d.panel('close');
+			}
+		}]
+	});
+}
+//用户机构弹窗
+function userForOrg(){
+	var row = dg.datagrid('getSelected');
+	if(rowIsNull(row)) return;
+	$.ajaxSetup({type : 'GET'});
+	d=$("#dlg").dialog({   
+	    title: '用户机构管理',    
+	    width: 580,    
+	    height: 350,  
+	    href:'${ctx}/system/user/'+row.id+'/userOrg',
+	    maximizable:true,
+	    modal:true,
+	    buttons:[{
+			text:'确认',
+			handler:function(){
+				saveUserOrg();
 				d.panel('close');
 			}
 		},{

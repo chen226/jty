@@ -23,6 +23,7 @@ import com.tianyu.jty.common.persistence.Page;
 import com.tianyu.jty.common.persistence.PropertyFilter;
 import com.tianyu.jty.common.web.BaseController;
 import com.tianyu.jty.system.entity.User;
+import com.tianyu.jty.system.service.UserOrgService;
 import com.tianyu.jty.system.service.UserRoleService;
 import com.tianyu.jty.system.service.UserService;
 
@@ -40,6 +41,9 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserRoleService userRoleService;
+	
+	@Autowired
+	private UserOrgService userOrgService;
 
 	/**
 	 * 默认页面
@@ -146,6 +150,19 @@ public class UserController extends BaseController {
 		model.addAttribute("userId", id);
 		return "system/userRoleList";
 	}
+	/**
+	 * 弹窗页-用户所在机构
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("sys:user:orgView")
+	@RequestMapping(value = "{userId}/userOrg")
+	public String getUserOrg(@PathVariable("userId") Integer id, Model model) {
+		model.addAttribute("userId", id);
+		return "system/userOrgList";
+	}
 
 	/**
 	 * 获取用户拥有的角色ID集合
@@ -158,6 +175,17 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public List<Integer> getRoleIdList(@PathVariable("id") Integer id) {
 		return userRoleService.getRoleIdList(id);
+	}
+	/**
+	 * 获取用户拥有的机构ID集合
+	 * @param id
+	 * @return
+	 */
+	@RequiresPermissions("sys:user:orgView")
+	@RequestMapping(value = "{id}/org")
+	@ResponseBody
+	public List<Integer> getOrgIdList(@PathVariable("id") Integer id) {
+		return userOrgService.getOrgIdList(id);
 	}
 
 	/**
@@ -172,6 +200,20 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public String updateUserRole(@PathVariable("id") Integer id,@RequestBody List<Integer> newRoleList) {
 		userRoleService.updateUserRole(id, userRoleService.getRoleIdList(id),newRoleList);
+		return "success";
+	}
+	/**
+	 * 修改用户所在的部门
+	 * 
+	 * @param id
+	 * @param newRoleList
+	 * @return
+	 */
+	@RequiresPermissions("sys:user:orgUpd")
+	@RequestMapping(value = "{id}/updateOrg")
+	@ResponseBody
+	public String updateUserOrg(@PathVariable("id") Integer id,@RequestBody List<Integer> newRoleList) {
+		userOrgService.updateUserOrg(id,newRoleList);
 		return "success";
 	}
 
