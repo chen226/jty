@@ -44,7 +44,7 @@
 			
 			</props>
 		</property>
-		<property name="packagesToScan" value="com.tianyu.jty" /><!-- 如果多个，用“,”分隔 -->
+		<property name="packagesToScan" value="com.tianyu.jty.shop,com.tianyu.jty.system" /><!-- 如果多个，用“,”分隔 -->
 	</bean>
 
 	<!-- 定义事务 -->
