@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/taglibs.jsp"%>
 
 <!DOCTYPE html>
@@ -7,38 +7,11 @@
 	<title>流程列表</title>
 
 	<%@ include file="/WEB-INF/views/include/easyui.jsp"%>
-    <script type="text/javascript">
-    $(function() {
-    	$('#create').button({
-    		icons: {
-    			primary: 'ui-icon-plus'
-    		}
-    	}).click(function() {
-    		$('#createModelTemplate').dialog({
-    			modal: true,
-    			width: 500,
-    			buttons: [{
-    				text: '创建',
-    				click: function() {
-    					if (!$('#name').val()) {
-    						alert('请填写名称！');
-    						$('#name').focus();
-    						return;
-    					}
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-    					$('#modelForm').submit();
-    				}
-    			}]
-    		});
-    	});
-    });
-
-		function showSvgTip() {
-			alert('点击"编辑"链接,在打开的页面中打开控制台执行\njQuery(".ORYX_Editor *").filter("svg")\n即可看到svg标签的内容.');
-		}
-    </script>
+<script type="text/javascript">
+	function add(){
+		alert("添加模型");
+	}
+</script>
 </head>
 <body style="font-family: '微软雅黑'">
 <div id="tb" style="padding:5px;height:auto">
@@ -51,22 +24,15 @@
 		        <a href="javascript(0)" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="cx()">查询</a>
 			</form>
 			
-	       	<shiro:hasPermission name="sys:dict:add">
-	       		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add();">添加</a>
-	       		<span class="toolbar-item dialog-tool-separator"></span>
-	       	</shiro:hasPermission>
-	       	<shiro:hasPermission name="sys:dict:delete">
-	            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-options="disabled:false" onclick="del()">删除</a>
-	            <span class="toolbar-item dialog-tool-separator"></span>
-	        </shiro:hasPermission>
-	        <shiro:hasPermission name="sys:dict:update">
-	            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="upd()">修改</a>
-	        </shiro:hasPermission>
+       		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add();">添加</a>
+       		<span class="toolbar-item dialog-tool-separator"></span>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-options="disabled:false" onclick="del()">删除</a>
+            <span class="toolbar-item dialog-tool-separator"></span>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="upd()">修改</a>
         </div> 
         
 </div>
 
-	<div style="text-align: right"><button id="create">创建</button></div>
 	<table width="100%" class="need-border">
 		<thead>
 			<tr>
