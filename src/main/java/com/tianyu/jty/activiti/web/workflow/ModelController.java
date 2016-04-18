@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -53,6 +54,15 @@ public class ModelController {
         mav.addObject("list", list);
         return mav;
     }
+    /**
+	 * 添加商品跳转
+	 * 
+	 * @param model
+	 */
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	public String createForm() {
+		return "workflow/modelForm";
+	}
 
     /**
      * 创建模型

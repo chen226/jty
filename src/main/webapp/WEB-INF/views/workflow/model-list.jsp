@@ -5,15 +5,11 @@
 <html>
 <head>
 	<title>流程列表</title>
+<%@ include file="/WEB-INF/views/include/easyui.jsp"%>
 
-	<%@ include file="/WEB-INF/views/include/easyui.jsp"%>
-<script type="text/javascript">
-	function add(){
-		alert("添加模型");
-	}
-</script>
 </head>
 <body style="font-family: '微软雅黑'">
+
 <div id="tb" style="padding:5px;height:auto">
         <div>
         	<form id="searchFrom" action="">
@@ -68,29 +64,30 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div id="createModelTemplate" title="创建模型" class="template">
-        <form id="modelForm" action="${ctx}/workflow/model/create" target="_blank" method="post">
-		<table>
-			<tr>
-				<td>名称：</td>
-				<td>
-					<input id="name" name="name" type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>KEY：</td>
-				<td>
-					<input id="key" name="key" type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>描述：</td>
-				<td>
-					<textarea id="description" name="description" style="width:300px;height: 50px;"></textarea>
-				</td>
-			</tr>
-		</table>
-        </form>
-	</div>
+<table id="dg"></table> 
+<div id="dlg"></div>  
+<script type="text/javascript">
+	function add(){
+		d=$("#dlg").dialog({   
+		    title: '添加模型',    
+		    width: 380,    
+		    height: 250,    
+		    href:'${ctx}/workflow/model/create',
+		    maximizable:true,
+		    modal:true,
+		    buttons:[{
+				text:'确认',
+				handler:function(){
+					$("#mainform").submit(); 
+				}
+			},{
+				text:'取消',
+				handler:function(){
+						d.panel('close');
+					}
+			}]
+		});
+	}
+</script>
 </body>
 </html>
