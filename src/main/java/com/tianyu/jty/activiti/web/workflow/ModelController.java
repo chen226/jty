@@ -55,7 +55,7 @@ public class ModelController {
         return mav;
     }
     /**
-	 * 添加商品跳转
+	 * 跳转到添加模型
 	 * 
 	 * @param model
 	 */

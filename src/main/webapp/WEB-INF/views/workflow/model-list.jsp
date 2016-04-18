@@ -6,7 +6,8 @@
 <head>
 	<title>流程列表</title>
 <%@ include file="/WEB-INF/views/include/easyui.jsp"%>
-
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body style="font-family: '微软雅黑'">
 
@@ -18,18 +19,13 @@
        	        <input type="text" name="filter_LIKES_type" class="easyui-validatebox" data-options="width:150,prompt: '类型'"/>
 		        <span class="toolbar-item dialog-tool-separator"></span>
 		        <a href="javascript(0)" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="cx()">查询</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add();">添加</a>
 			</form>
-			
-       		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add();">添加</a>
-       		<span class="toolbar-item dialog-tool-separator"></span>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-options="disabled:false" onclick="del()">删除</a>
-            <span class="toolbar-item dialog-tool-separator"></span>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="upd()">修改</a>
+       		
         </div> 
         
 </div>
-
-	<table width="100%" class="need-border">
+	<table width="100%" class="need-border table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -49,8 +45,8 @@
 					<td>${model.key }</td>
 					<td>${model.name}</td>
 					<td>${model.version}</td>
-					<td>${model.createTime}</td>
-					<td>${model.lastUpdateTime}</td>
+					<td><fmt:formatDate value="${model.createTime}" type="both"/></td>
+					<td><fmt:formatDate value="${model.lastUpdateTime}" type="both"/></td>
 					<td>${model.metaInfo}</td>
 					<td>
 						<a href="${ctx}/modeler.html?modelId=${model.id}" target="_blank">编辑</a>
@@ -70,8 +66,8 @@
 	function add(){
 		d=$("#dlg").dialog({   
 		    title: '添加模型',    
-		    width: 380,    
-		    height: 250,    
+		    width: 500,    
+		    height: 350,    
 		    href:'${ctx}/workflow/model/create',
 		    maximizable:true,
 		    modal:true,
