@@ -1,27 +1,15 @@
-<%@page import="me.kafeitu.demo.activiti.util.ProcessDefinitionCache,org.activiti.engine.RepositoryService"%>
+<%@page import="com.tianyu.jty.activiti.util.ProcessDefinitionCache,org.activiti.engine.RepositoryService"%>
 <%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/taglibs.jsp"%>
 <!DOCTYPE html>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 <head>
-	<%@ include file="/common/global.jsp"%>
 	<title>管理运行中流程</title>
-	<%@ include file="/common/meta.jsp" %>
-    <%@ include file="/common/include-base-styles.jsp" %>
-    <%@ include file="/common/include-jquery-ui-theme.jsp" %>
-    <link href="${ctx }/js/common/plugins/jui/extends/timepicker/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet" />
-    <link href="${ctx }/js/common/plugins/qtip/jquery.qtip.min.css" type="text/css" rel="stylesheet" />
-    <%@ include file="/common/include-custom-styles.jsp" %>
-
-    <script src="${ctx }/js/common/jquery-1.8.3.js" type="text/javascript"></script>
-    <script src="${ctx }/js/common/plugins/jui/jquery-ui-${themeVersion }.min.js" type="text/javascript"></script>
-    <script src="${ctx }/js/common/plugins/jui/extends/timepicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-	<script src="${ctx }/js/common/plugins/jui/extends/i18n/jquery-ui-date_time-picker-zh-CN.js" type="text/javascript"></script>
-	<script src="${ctx }/js/common/plugins/qtip/jquery.qtip.pack.js" type="text/javascript"></script>
-	<script src="${ctx }/js/common/plugins/html/jquery.outerhtml.js" type="text/javascript"></script>
-	<script src="${ctx }/js/module/activiti/workflow.js" type="text/javascript"></script>
-	<script type="text/javascript">
+<%@ include file="/WEB-INF/views/include/easyui.jsp"%>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 	$(function() {
 		// 跟踪
 	    $('.trace').click(graphTrace);
@@ -42,7 +30,7 @@
 			</div>
 		</div>
 	</c:if>
-	<table>
+	<table width="100%" class="need-border table table-bordered table-hover">
 		<tr>
 			<th>执行IDssss</th>
 			<th>流程实例ID</th>

@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/taglibs.jsp"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<%@ include file="/common/global.jsp"%>
-	<script>
-		var notLogon = ${empty user};
-		if (notLogon) {
-			location.href = '${ctx}/login?error=nologon';
-		}
-	</script>
-	<%@ include file="/common/meta.jsp" %>
-	<%@ include file="/common/include-base-styles.jsp" %>
-	<%@ include file="/common/include-jquery-ui-theme.jsp" %>
-	<%@ include file="/common/include-custom-styles.jsp" %>
+<%@ include file="/WEB-INF/views/include/easyui.jsp"%>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<title>流程列表</title>
 
 	<script src="${ctx }/js/common/jquery-1.8.3.js" type="text/javascript"></script>
@@ -56,7 +50,7 @@
 			<input type="submit" value="Submit" />
 		</form>
 	</fieldset>
-	<table width="100%" class="need-border">
+	<table width="100%" class="need-border  table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th>ProcessDefinitionId</th>
