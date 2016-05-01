@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -68,8 +69,10 @@ public class ModelController {
      * 创建模型
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public void create(@RequestParam("name") String name, @RequestParam("key") String key, @RequestParam("description") String description,
+    @ResponseBody
+    public String create(@RequestParam("name") String name, @RequestParam("key") String key, @RequestParam("description") String description,
                        HttpServletRequest request, HttpServletResponse response) {
+    	String state;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             ObjectNode editorNode = objectMapper.createObjectNode();
@@ -92,10 +95,13 @@ public class ModelController {
             repositoryService.saveModel(modelData);
             repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
 
-            response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelData.getId());
+            //response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelData.getId());
+            state ="success";
         } catch (Exception e) {
             logger.error("创建模型失败：", e);
+            state="创建模型失败";
         }
+        return state;
     }
 
     /**

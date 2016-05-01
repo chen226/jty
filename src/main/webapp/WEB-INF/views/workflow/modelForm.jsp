@@ -42,8 +42,9 @@ $(function(){
 			return isValid;	// 返回false终止表单提交
 	    },    
 	    success:function(data){   
-	    	if(successTip(data,dg,d))
-	    		dg.treegrid('reload');
+	    	if(successTip(data,null,null)){
+	    		location.reload() ;
+	    	}
 	    }    
 	}); 
 });

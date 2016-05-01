@@ -63,6 +63,8 @@
 <table id="dg"></table> 
 <div id="dlg"></div>  
 <script type="text/javascript">
+var dg;
+var d;
 	function add(){
 		d=$("#dlg").dialog({   
 		    title: '添加模型',    
