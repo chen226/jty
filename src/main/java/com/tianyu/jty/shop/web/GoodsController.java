@@ -64,7 +64,7 @@ public class GoodsController extends BaseController{
 	public String createForm(Model model) {
 		model.addAttribute("goods", new Goods());
 		model.addAttribute("action", "create");
-		return "system/goodsForm";
+		return "shop/goodsForm";
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class GoodsController extends BaseController{
 	public String updateForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("goods", goodsService.get(id));
 		model.addAttribute("action", "update");
-		return "system/goodsForm";
+		return "shop/goodsForm";
 	}
 
 	/**

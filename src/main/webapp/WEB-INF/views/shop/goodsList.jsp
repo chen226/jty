@@ -71,10 +71,10 @@ $(function(){
 //弹窗增加
 function add() {
 	d=$("#dlg").dialog({   
-	    title: '添加用户',    
+	    title: '添加商品',    
 	    width: 380,    
 	    height: 250,    
-	    href:'${ctx}/system/dict/create',
+	    href:'${ctx}/shop/goods/create',
 	    maximizable:true,
 	    modal:true,
 	    buttons:[{
@@ -99,7 +99,7 @@ function del(){
 		if (data){
 			$.ajax({
 				type:'get',
-				url:"${ctx}/system/dict/delete/"+row.id,
+				url:"${ctx}/shop/goods/delete/"+row.id,
 				success: function(data){
 					successTip(data,dg);
 				}
@@ -116,7 +116,7 @@ function upd(){
 	    title: '修改用户',    
 	    width: 380,    
 	    height: 250,    
-	    href:'${ctx}/system/dict/update/'+row.id,
+	    href:'${ctx}/shop/goods/update/'+row.id,
 	    maximizable:true,
 	    modal:true,
 	    buttons:[{
