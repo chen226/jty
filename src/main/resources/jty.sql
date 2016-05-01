@@ -1,22 +1,24 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50541
-Source Host           : localhost:3306
-Source Database       : jty
+ Source Server         : 127.0.0.1
+ Source Server Type    : MySQL
+ Source Server Version : 50710
+ Source Host           : localhost
+ Source Database       : jty
 
-Target Server Type    : MYSQL
-Target Server Version : 50541
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50710
+ File Encoding         : utf-8
 
-Date: 2015-01-23 11:06:02
+ Date: 05/01/2016 23:59:25 PM
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for adver
+--  Table structure for `adver`
 -- ----------------------------
 DROP TABLE IF EXISTS `adver`;
 CREATE TABLE `adver` (
@@ -29,11 +31,27 @@ CREATE TABLE `adver` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of adver
+--  Table structure for `area_info`
 -- ----------------------------
+DROP TABLE IF EXISTS `area_info`;
+CREATE TABLE `area_info` (
+  `ID` int(9) NOT NULL AUTO_INCREMENT,
+  `AREA_CODE` varchar(12) DEFAULT NULL,
+  `AREA_NAME` varchar(50) DEFAULT NULL,
+  `PID` int(9) DEFAULT NULL,
+  `SORT` int(3) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for dict
+--  Records of `area_info`
+-- ----------------------------
+BEGIN;
+INSERT INTO `area_info` VALUES ('1', '100000', '中国', null, '1');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `dict`
 -- ----------------------------
 DROP TABLE IF EXISTS `dict`;
 CREATE TABLE `dict` (
@@ -49,15 +67,14 @@ CREATE TABLE `dict` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of dict
+--  Records of `dict`
 -- ----------------------------
-INSERT INTO `dict` VALUES ('1', '正常', '0', 'user', '用户状态', '1', null, null);
-INSERT INTO `dict` VALUES ('2', '禁用', '1', 'user', '用户状态', '2', null, null);
-INSERT INTO `dict` VALUES ('4', '普通用户', '0', 'user', '用户类型', null, null, null);
-INSERT INTO `dict` VALUES ('5', '会员用户', '1', 'user', '用户类型', null, null, null);
+BEGIN;
+INSERT INTO `dict` VALUES ('1', '正常', '0', 'user', '用户状态', '1', null, null), ('2', '禁用', '1', 'user', '用户状态', '2', null, null), ('4', '普通用户', '0', 'user', '用户类型', null, null, null), ('5', '会员用户', '1', 'user', '用户类型', null, null, null);
+COMMIT;
 
 -- ----------------------------
--- Table structure for goods
+--  Table structure for `goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -80,12 +97,14 @@ CREATE TABLE `goods` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of goods
+--  Records of `goods`
 -- ----------------------------
+BEGIN;
 INSERT INTO `goods` VALUES ('1', 'aaa', 'aaa', 'aaa', '1', '11', '11', '11', '1', '1', '1', '1', '11');
+COMMIT;
 
 -- ----------------------------
--- Table structure for goods_type
+--  Table structure for `goods_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_type`;
 CREATE TABLE `goods_type` (
@@ -97,22 +116,35 @@ CREATE TABLE `goods_type` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of goods_type
+--  Records of `goods_type`
 -- ----------------------------
-INSERT INTO `goods_type` VALUES ('1', null, '男装·女装', null);
-INSERT INTO `goods_type` VALUES ('2', null, '鞋靴·箱包', null);
-INSERT INTO `goods_type` VALUES ('3', null, '手机·数码', null);
-INSERT INTO `goods_type` VALUES ('4', null, '家电·办公', null);
-INSERT INTO `goods_type` VALUES ('5', '1', '男上衣', 'aaa');
-INSERT INTO `goods_type` VALUES ('6', '1', '男裤', null);
-INSERT INTO `goods_type` VALUES ('7', '1', '男内衣', null);
-INSERT INTO `goods_type` VALUES ('8', '1', '女裤', null);
-INSERT INTO `goods_type` VALUES ('9', '3', '笔记本', null);
-INSERT INTO `goods_type` VALUES ('10', '3', '台式机', null);
-INSERT INTO `goods_type` VALUES ('11', '4', '电视', null);
+BEGIN;
+INSERT INTO `goods_type` VALUES ('1', null, '男装·女装', null), ('2', null, '鞋靴·箱包', null), ('3', null, '手机·数码', null), ('4', null, '家电·办公', null), ('5', '1', '男上衣', 'aaa'), ('6', '1', '男裤', null), ('7', '1', '男内衣', null), ('8', '1', '女裤', null), ('9', '3', '笔记本', null), ('10', '3', '台式机', null), ('11', '4', '电视', null);
+COMMIT;
 
 -- ----------------------------
--- Table structure for log
+--  Table structure for `leave_jpa`
+-- ----------------------------
+DROP TABLE IF EXISTS `leave_jpa`;
+CREATE TABLE `leave_jpa` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `apply_time` datetime DEFAULT NULL,
+  `dept_leader_approved` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `hr_approved` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `leave_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `process_instance_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `reality_end_time` datetime DEFAULT NULL,
+  `reality_start_time` datetime DEFAULT NULL,
+  `reason` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `report_back_date` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `user_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `log`
 -- ----------------------------
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
@@ -129,22 +161,58 @@ CREATE TABLE `log` (
   `DESCRIPTION` varchar(500) DEFAULT NULL COMMENT '详细描述',
   `REQUEST_PARAM` varchar(500) DEFAULT NULL COMMENT '请求参数',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2267 DEFAULT CHARSET=utf8 COMMENT='日录资料表';
+) ENGINE=InnoDB AUTO_INCREMENT=2287 DEFAULT CHARSET=utf8 COMMENT='日录资料表';
 
 -- ----------------------------
--- Records of log
+--  Records of `log`
 -- ----------------------------
-INSERT INTO `log` VALUES ('2259', '/system/user/update', 'admin', '2014-12-04 10:25:40', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '22', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb1234\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}');
-INSERT INTO `log` VALUES ('2260', '/system/user/update', 'admin', '2014-12-04 10:26:14', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '9', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb12346\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}');
-INSERT INTO `log` VALUES ('2261', '/system/user/update', 'admin', '2014-12-04 10:37:01', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '7', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb123466\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}');
-INSERT INTO `log` VALUES ('2262', '/system/role/update', 'admin', '2014-12-04 10:48:43', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '215', null, '{\"id\":[\"12\"],\"roleCode\":[\"guest212\"],\"sort\":[\"4\"],\"description\":[\"s\"],\"name\":[\"guest22\"]}');
-INSERT INTO `log` VALUES ('2263', '/system/user/create', 'admin', '2014-12-05 11:55:03', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '305', null, '{\"id\":[\"\"],\"birthday\":[\"2014-12-05\"],\"confirmPassword\":[\"123456\"],\"phone\":[\"\"],\"email\":[\"\"],\"name\":[\"tyty\"],\"plainPassword\":[\"123456\"],\"gender\":[\"1\"],\"loginName\":[\"test\"]}');
-INSERT INTO `log` VALUES ('2264', '/system/permission/create', 'admin', '2014-12-13 11:19:15', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '215', null, '{\"id\":[\"\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"system/scheuleJob\"]}');
-INSERT INTO `log` VALUES ('2265', '/system/permission/update', 'admin', '2014-12-13 11:19:40', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '66', null, '{\"id\":[\"37\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"15\"],\"type\":[\"F\"],\"url\":[\"system/scheuleJob\"]}');
-INSERT INTO `log` VALUES ('2266', '/system/permission/update', 'admin', '2014-12-13 11:22:17', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '186', null, '{\"id\":[\"37\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"15\"],\"type\":[\"F\"],\"url\":[\"system/scheduleJob\"]}');
+BEGIN;
+INSERT INTO `log` VALUES ('2259', '/system/user/update', 'admin', '2014-12-04 10:25:40', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '22', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb1234\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}'), ('2260', '/system/user/update', 'admin', '2014-12-04 10:26:14', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '9', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb12346\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}'), ('2261', '/system/user/update', 'admin', '2014-12-04 10:37:01', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '7', null, '{\"id\":[\"4\"],\"birthday\":[\"2014-4-2\"],\"phone\":[\"400\"],\"email\":[\"11@11.bee\"],\"name\":[\"bbb123466\"],\"gender\":[\"0\"],\"loginName\":[\"bbb222\"]}'), ('2262', '/system/role/update', 'admin', '2014-12-04 10:48:43', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '215', null, '{\"id\":[\"12\"],\"roleCode\":[\"guest212\"],\"sort\":[\"4\"],\"description\":[\"s\"],\"name\":[\"guest22\"]}'), ('2263', '/system/user/create', 'admin', '2014-12-05 11:55:03', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '305', null, '{\"id\":[\"\"],\"birthday\":[\"2014-12-05\"],\"confirmPassword\":[\"123456\"],\"phone\":[\"\"],\"email\":[\"\"],\"name\":[\"tyty\"],\"plainPassword\":[\"123456\"],\"gender\":[\"1\"],\"loginName\":[\"test\"]}'), ('2264', '/system/permission/create', 'admin', '2014-12-13 11:19:15', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '215', null, '{\"id\":[\"\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"system/scheuleJob\"]}'), ('2265', '/system/permission/update', 'admin', '2014-12-13 11:19:40', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '66', null, '{\"id\":[\"37\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"15\"],\"type\":[\"F\"],\"url\":[\"system/scheuleJob\"]}'), ('2266', '/system/permission/update', 'admin', '2014-12-13 11:22:17', null, 'Windows 7', 'Firefox 3', '127.0.0.1', null, '186', null, '{\"id\":[\"37\"],\"icon\":[\"icon-hamburg-full-time\"],\"sort\":[\"\"],\"description\":[\"定时任务管理，支持集群\"],\"name\":[\"定时任务管理\"],\"permCode\":[\"\"],\"pid\":[\"15\"],\"type\":[\"F\"],\"url\":[\"system/scheduleJob\"]}'), ('2267', '/system/permission/create', 'admin', '2016-04-10 10:57:13', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '44', null, '{\"id\":[\"\"],\"description\":[\"流程管理\"],\"name\":[\"流程管理\"],\"permCode\":[\"flowmanager\"],\"pid\":[\"\"],\"type\":[\"O\"],\"url\":[\"/flow\"]}'), ('2268', '/system/permission/create', 'admin', '2016-04-10 10:57:13', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '91', null, '{\"id\":[\"\"],\"description\":[\"流程管理\"],\"name\":[\"流程管理\"],\"permCode\":[\"flowmanager\"],\"pid\":[\"\"],\"type\":[\"O\"],\"url\":[\"/flow\"]}'), ('2269', '/system/permission/create', 'admin', '2016-04-10 11:04:09', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '54', null, '{\"id\":[\"\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"/flower\"]}'), ('2270', '/system/permission/create', 'admin', '2016-04-10 11:04:09', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '67', null, '{\"id\":[\"\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"/flower\"]}'), ('2271', '/system/permission/update', 'admin', '2016-04-10 11:04:23', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '14', null, '{\"id\":[\"79\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"flower\"]}'), ('2272', '/system/permission/update', 'admin', '2016-04-10 11:04:23', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '25', null, '{\"id\":[\"79\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"flower\"]}'), ('2273', '/system/permission/update', 'admin', '2016-04-10 11:04:32', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '10', null, '{\"id\":[\"79\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"\"]}'), ('2274', '/system/permission/update', 'admin', '2016-04-10 11:04:32', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '16', null, '{\"id\":[\"79\"],\"icon\":[\"icon-standard-arrow-switch\"],\"sort\":[\"\"],\"description\":[\"\"],\"name\":[\"流程管理\"],\"pid\":[\"\"],\"type\":[\"F\"],\"url\":[\"\"]}'), ('2275', '/system/permission/update', 'admin', '2016-04-10 11:04:53', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '8', null, '{\"id\":[\"72\"],\"icon\":[\"icon-hamburg-product\"],\"sort\":[\"1\"],\"description\":[\"商品管理\"],\"name\":[\"商品管理\"],\"pid\":[\"71\"],\"type\":[\"F\"],\"url\":[\"shop/goods\"]}'), ('2276', '/system/permission/update', 'admin', '2016-04-10 11:04:53', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '14', null, '{\"id\":[\"72\"],\"icon\":[\"icon-hamburg-product\"],\"sort\":[\"1\"],\"description\":[\"商品管理\"],\"name\":[\"商品管理\"],\"pid\":[\"71\"],\"type\":[\"F\"],\"url\":[\"shop/goods\"]}'), ('2277', '/system/permission/update', 'admin', '2016-04-10 11:04:57', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '10', null, '{\"id\":[\"73\"],\"icon\":[\"icon-hamburg-milestone\"],\"sort\":[\"2\"],\"description\":[\"商品类型\"],\"name\":[\"商品类型管理\"],\"pid\":[\"71\"],\"type\":[\"F\"],\"url\":[\"shop/goodsType\"]}'), ('2278', '/system/permission/update', 'admin', '2016-04-10 11:04:57', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '16', null, '{\"id\":[\"73\"],\"icon\":[\"icon-hamburg-milestone\"],\"sort\":[\"2\"],\"description\":[\"商品类型\"],\"name\":[\"商品类型管理\"],\"pid\":[\"71\"],\"type\":[\"F\"],\"url\":[\"shop/goodsType\"]}'), ('2279', '/system/permission/create', 'admin', '2016-04-10 11:08:15', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '38', null, '{\"id\":[\"\"],\"icon\":[\"icon-standard-book-next\"],\"sort\":[\"1\"],\"description\":[\"\"],\"name\":[\"模型工作区\"],\"pid\":[\"79\"],\"type\":[\"F\"],\"url\":[\"workflow/model/list\"]}'), ('2280', '/system/permission/create', 'admin', '2016-04-10 11:08:15', null, 'Mac OS X', 'Safari', '127.0.0.1', null, '50', null, '{\"id\":[\"\"],\"icon\":[\"icon-standard-book-next\"],\"sort\":[\"1\"],\"description\":[\"\"],\"name\":[\"模型工作区\"],\"pid\":[\"79\"],\"type\":[\"F\"],\"url\":[\"workflow/model/list\"]}'), ('2281', '/workflow/model/create', 'admin', '2016-04-17 23:13:29', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '35691', null, '{\"name\":[\"测试\"],\"key\":[\"test\"],\"description\":[\"ces\"]}'), ('2282', '/workflow/model/delete/2501', 'admin', '2016-04-18 17:10:23', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '46', null, '{}'), ('2283', '/system/permission/create', 'admin', '2016-04-23 11:02:57', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '74', null, '{\"id\":[\"\"],\"type\":[\"F\"],\"name\":[\"流程管理\"],\"url\":[\"/workflow/processinstance/running\"],\"icon\":[\"icon-hamburg-equalizer\"],\"pid\":[\"79\"],\"sort\":[\"\"],\"description\":[\"\"]}'), ('2284', '/system/permission/update', 'admin', '2016-04-23 11:15:11', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '41', null, '{\"id\":[\"81\"],\"type\":[\"F\"],\"name\":[\"流程管理\"],\"url\":[\"workflow/processinstance/running\"],\"icon\":[\"icon-hamburg-equalizer\"],\"pid\":[\"79\"],\"sort\":[\"\"],\"description\":[\"\"]}'), ('2285', '/system/permission/update', 'admin', '2016-04-23 11:16:13', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '18', null, '{\"id\":[\"81\"],\"type\":[\"F\"],\"name\":[\"活动流程\"],\"url\":[\"workflow/processinstance/running\"],\"icon\":[\"icon-hamburg-equalizer\"],\"pid\":[\"79\"],\"sort\":[\"\"],\"description\":[\"\"]}'), ('2286', '/system/permission/create', 'admin', '2016-04-25 14:45:22', null, 'Mac OS X', 'Chrome', '127.0.0.1', null, '75', null, '{\"id\":[\"\"],\"type\":[\"F\"],\"name\":[\"部署流程管理\"],\"url\":[\"workflow/process-list\"],\"icon\":[\"icon-hamburg-graphic\"],\"pid\":[\"79\"],\"sort\":[\"\"],\"description\":[\"\"]}');
+COMMIT;
 
 -- ----------------------------
--- Table structure for permission
+--  Table structure for `oa_leave`
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_leave`;
+CREATE TABLE `oa_leave` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `apply_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `leave_type` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `process_instance_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `reality_end_time` datetime DEFAULT NULL,
+  `reality_start_time` datetime DEFAULT NULL,
+  `reason` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `user_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `organization`
+-- ----------------------------
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE `organization` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `org_name` varchar(255) NOT NULL,
+  `pid` int(9) DEFAULT NULL,
+  `org_type` varchar(255) DEFAULT NULL,
+  `org_sort` int(3) DEFAULT '0',
+  `org_level` int(3) DEFAULT NULL,
+  `org_code` varchar(255) DEFAULT NULL,
+  `area_id` int(9) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `organization`
+-- ----------------------------
+BEGIN;
+INSERT INTO `organization` VALUES ('1', '总部', null, '总部', '1', '1', '000000', null), ('2', '12313', '1', '13', '31', '131', '131313', '1');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `permission`
 -- ----------------------------
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE `permission` (
@@ -159,59 +227,17 @@ CREATE TABLE `permission` (
   `STATE` varchar(10) DEFAULT NULL,
   `DESCRIPTION` text,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of permission
+--  Records of `permission`
 -- ----------------------------
-INSERT INTO `permission` VALUES ('1', null, '系统管理', 'F', '1', '', '', 'icon-standard-cog', '', '');
-INSERT INTO `permission` VALUES ('2', '1', '角色管理', 'F', '3', 'system/role', '', 'icon-hamburg-my-account', 'closed', '');
-INSERT INTO `permission` VALUES ('3', '1', '用户管理', 'F', '2', 'system/user', '', 'icon-hamburg-user', 'closed', '');
-INSERT INTO `permission` VALUES ('4', '2', '添加', 'O', null, '', 'sys:role:add', '', '', '角色添加');
-INSERT INTO `permission` VALUES ('5', '2', '删除', 'O', null, '', 'sys:role:delete', '', '', '角色删除');
-INSERT INTO `permission` VALUES ('6', '2', '修改', 'O', null, '', 'sys:role:update', '', '', '角色修改');
-INSERT INTO `permission` VALUES ('7', '3', '添加', 'O', null, '', 'sys:user:add', '', '', '用户添加');
-INSERT INTO `permission` VALUES ('8', '3', '删除', 'O', null, '', 'sys:user:delete', '', '', '用户删除');
-INSERT INTO `permission` VALUES ('12', '1', '权限管理', 'F', '5', 'system/permission', '', 'icon-hamburg-login', 'closed', '');
-INSERT INTO `permission` VALUES ('14', '15', '数据源监控', 'F', '6', 'druid', '', 'icon-hamburg-database', '', '');
-INSERT INTO `permission` VALUES ('15', null, '系统监控', 'F', '5', '', '', 'icon-hamburg-graphic', '', '');
-INSERT INTO `permission` VALUES ('16', '3', '修改', 'O', null, '', 'sys:user:update', '', '', '用户修改');
-INSERT INTO `permission` VALUES ('20', '15', '日志管理', 'F', '7', 'system/log', '', 'icon-hamburg-archives', '', '');
-INSERT INTO `permission` VALUES ('25', '12', '添加', 'O', null, '', 'sys:perm:add', '', '', '菜单添加');
-INSERT INTO `permission` VALUES ('26', '12', '修改', 'O', null, '', 'sys:perm:update', '', '', '菜单修改');
-INSERT INTO `permission` VALUES ('27', '12', '删除', 'O', null, '', 'sys:perm:delete', '', '', '菜单删除');
-INSERT INTO `permission` VALUES ('28', '2', '查看', 'O', null, '', 'sys:role:view', '', '', '角色查看');
-INSERT INTO `permission` VALUES ('29', '3', '查看', 'O', null, '', 'sys:user:view', '', null, '用户查看');
-INSERT INTO `permission` VALUES ('30', '12', '查看', 'O', null, '', 'sys:perm:view', '', null, '权限查看');
-INSERT INTO `permission` VALUES ('31', '20', '删除', 'O', null, '', 'sys:log:delete', '', null, '删除日志');
-INSERT INTO `permission` VALUES ('32', '20', '导出excel', 'O', null, '', 'sys:log:exportExcel', '', null, '导出日志excel');
-INSERT INTO `permission` VALUES ('33', '3', '查看用户角色', 'O', null, '', 'sys:user:roleView', '', null, '查看用户角色');
-INSERT INTO `permission` VALUES ('34', '2', '保存授权', 'O', null, '', 'sys:role:permUpd', '', null, '保存修改的角色权限');
-INSERT INTO `permission` VALUES ('35', '3', '修改用户角色', 'O', null, '', 'sys:user:roleUpd', '', null, '修改用户拥有的角色');
-INSERT INTO `permission` VALUES ('36', '2', '查看角色权限', 'O', null, '', 'sys:role:permView', '', null, '查看角色拥有的权限');
-INSERT INTO `permission` VALUES ('37', '15', '定时任务管理', 'F', null, 'system/scheduleJob', '', 'icon-hamburg-full-time', null, '定时任务管理，支持集群');
-INSERT INTO `permission` VALUES ('38', '15', 'cron表达式生成', 'F', null, 'system/scheduleJob/quartzCron', '', 'icon-hamburg-future', null, '');
-INSERT INTO `permission` VALUES ('39', '1', '菜单管理', 'F', '4', 'system/permission/menu', '', 'icon-hamburg-old-versions', null, '');
-INSERT INTO `permission` VALUES ('40', '1', '字典管理', 'F', '6', 'system/dict', null, 'icon-hamburg-address', null, '数据字典管理');
-INSERT INTO `permission` VALUES ('45', '39', '修改', 'O', null, '', 'sys:perm:update', null, null, '菜单管理');
-INSERT INTO `permission` VALUES ('58', '39', '添加', 'O', null, '', 'sys:perm:add', null, null, '菜单管理');
-INSERT INTO `permission` VALUES ('59', '39', '删除', 'O', null, '', 'sys:perm:delte', null, null, '菜单管理');
-INSERT INTO `permission` VALUES ('61', '40', '添加', 'O', null, '', 'sys:dict:add', null, null, '字典管理');
-INSERT INTO `permission` VALUES ('62', '40', '删除', 'O', null, '', 'sys:dict:delete', null, null, '字典管理');
-INSERT INTO `permission` VALUES ('63', '40', '修改', 'O', null, '', 'sys:dict:update', null, null, '字典管理');
-INSERT INTO `permission` VALUES ('68', '20', '查看', 'O', null, '', 'sys:log:view', null, null, '查看日志');
-INSERT INTO `permission` VALUES ('69', '40', '查看', 'O', null, '', 'sys:dict:view', null, null, '字典管理');
-INSERT INTO `permission` VALUES ('70', '39', '查看', 'O', null, '', 'sys:perm:menu:view', null, null, '菜单管理');
-INSERT INTO `permission` VALUES ('71', null, '商店管理', 'F', null, '', null, 'icon-hamburg-basket', null, '商店');
-INSERT INTO `permission` VALUES ('72', '71', '商品管理', 'F', null, 'shop/goods', null, 'icon-hamburg-product', null, '商品管理');
-INSERT INTO `permission` VALUES ('73', '71', '商品类型管理', 'F', null, 'shop/goodsType', null, 'icon-hamburg-milestone', null, '商品类型');
-INSERT INTO `permission` VALUES ('74', '1' , '区域信息', 'F', '7', 'system/area', NULL, 'icon-hamburg-world', NULL, '管理行政区划');
-INSERT INTO `permission` VALUES ('75', '1', '机构管理', 'F', '8', 'system/organization', null, 'icon-cologne-home', null, '组织机构管理');
-INSERT INTO `permission` VALUES ('76', '3', '查看用户机构', 'O', null, '', 'sys:user:orgView', null, null, '查看用户机构');
-INSERT INTO `permission` VALUES ('77', '3', '修改用户机构', 'O', null, '', 'sys:user:orgUpd', null, null, '修改用户所在的机构');
+BEGIN;
+INSERT INTO `permission` VALUES ('1', null, '系统管理', 'F', '1', '', '', 'icon-standard-cog', '', ''), ('2', '1', '角色管理', 'F', '3', 'system/role', '', 'icon-hamburg-my-account', 'closed', ''), ('3', '1', '用户管理', 'F', '2', 'system/user', '', 'icon-hamburg-user', 'closed', ''), ('4', '2', '添加', 'O', null, '', 'sys:role:add', '', '', '角色添加'), ('5', '2', '删除', 'O', null, '', 'sys:role:delete', '', '', '角色删除'), ('6', '2', '修改', 'O', null, '', 'sys:role:update', '', '', '角色修改'), ('7', '3', '添加', 'O', null, '', 'sys:user:add', '', '', '用户添加'), ('8', '3', '删除', 'O', null, '', 'sys:user:delete', '', '', '用户删除'), ('12', '1', '权限管理', 'F', '5', 'system/permission', '', 'icon-hamburg-login', 'closed', ''), ('14', '15', '数据源监控', 'F', '6', 'druid', '', 'icon-hamburg-database', '', ''), ('15', null, '系统监控', 'F', '5', '', '', 'icon-hamburg-graphic', '', ''), ('16', '3', '修改', 'O', null, '', 'sys:user:update', '', '', '用户修改'), ('20', '15', '日志管理', 'F', '7', 'system/log', '', 'icon-hamburg-archives', '', ''), ('25', '12', '添加', 'O', null, '', 'sys:perm:add', '', '', '菜单添加'), ('26', '12', '修改', 'O', null, '', 'sys:perm:update', '', '', '菜单修改'), ('27', '12', '删除', 'O', null, '', 'sys:perm:delete', '', '', '菜单删除'), ('28', '2', '查看', 'O', null, '', 'sys:role:view', '', '', '角色查看'), ('29', '3', '查看', 'O', null, '', 'sys:user:view', '', null, '用户查看'), ('30', '12', '查看', 'O', null, '', 'sys:perm:view', '', null, '权限查看'), ('31', '20', '删除', 'O', null, '', 'sys:log:delete', '', null, '删除日志'), ('32', '20', '导出excel', 'O', null, '', 'sys:log:exportExcel', '', null, '导出日志excel'), ('33', '3', '查看用户角色', 'O', null, '', 'sys:user:roleView', '', null, '查看用户角色'), ('34', '2', '保存授权', 'O', null, '', 'sys:role:permUpd', '', null, '保存修改的角色权限'), ('35', '3', '修改用户角色', 'O', null, '', 'sys:user:roleUpd', '', null, '修改用户拥有的角色'), ('36', '2', '查看角色权限', 'O', null, '', 'sys:role:permView', '', null, '查看角色拥有的权限'), ('37', '15', '定时任务管理', 'F', null, 'system/scheduleJob', '', 'icon-hamburg-full-time', null, '定时任务管理，支持集群'), ('38', '15', 'cron表达式生成', 'F', null, 'system/scheduleJob/quartzCron', '', 'icon-hamburg-future', null, ''), ('39', '1', '菜单管理', 'F', '4', 'system/permission/menu', '', 'icon-hamburg-old-versions', null, ''), ('40', '1', '字典管理', 'F', '6', 'system/dict', null, 'icon-hamburg-address', null, '数据字典管理'), ('45', '39', '修改', 'O', null, '', 'sys:perm:update', null, null, '菜单管理'), ('58', '39', '添加', 'O', null, '', 'sys:perm:add', null, null, '菜单管理'), ('59', '39', '删除', 'O', null, '', 'sys:perm:delte', null, null, '菜单管理'), ('61', '40', '添加', 'O', null, '', 'sys:dict:add', null, null, '字典管理'), ('62', '40', '删除', 'O', null, '', 'sys:dict:delete', null, null, '字典管理'), ('63', '40', '修改', 'O', null, '', 'sys:dict:update', null, null, '字典管理'), ('68', '20', '查看', 'O', null, '', 'sys:log:view', null, null, '查看日志'), ('69', '40', '查看', 'O', null, '', 'sys:dict:view', null, null, '字典管理'), ('70', '39', '查看', 'O', null, '', 'sys:perm:menu:view', null, null, '菜单管理'), ('71', null, '商店管理', 'F', null, '', null, 'icon-hamburg-basket', null, '商店'), ('72', '71', '商品管理', 'F', '1', 'shop/goods', null, 'icon-hamburg-product', null, '商品管理'), ('73', '71', '商品类型管理', 'F', '2', 'shop/goodsType', null, 'icon-hamburg-milestone', null, '商品类型'), ('74', '1', '区域信息', 'F', '7', 'system/area', null, 'icon-hamburg-world', null, '管理行政区划'), ('75', '1', '机构管理', 'F', '8', 'system/organization', null, 'icon-cologne-home', null, '组织机构管理'), ('76', '3', '查看用户机构', 'O', null, '', 'sys:user:orgView', null, null, '查看用户机构'), ('77', '3', '修改用户机构', 'O', null, '', 'sys:user:orgUpd', null, null, '修改用户所在的机构'), ('79', null, '流程管理', 'F', null, '', null, 'icon-standard-arrow-switch', null, ''), ('80', '79', '模型工作区', 'F', '1', 'workflow/model/list', null, 'icon-standard-book-next', null, ''), ('81', '79', '活动流程', 'F', null, 'workflow/processinstance/running', null, 'icon-hamburg-equalizer', null, ''), ('82', '79', '部署流程管理', 'F', null, 'workflow/process-list', null, 'icon-hamburg-graphic', null, '');
+COMMIT;
 
 -- ----------------------------
--- Table structure for qrtz_blob_triggers
+--  Table structure for `qrtz_blob_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_blob_triggers`;
 CREATE TABLE `qrtz_blob_triggers` (
@@ -224,11 +250,7 @@ CREATE TABLE `qrtz_blob_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_blob_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_calendars
+--  Table structure for `qrtz_calendars`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_calendars`;
 CREATE TABLE `qrtz_calendars` (
@@ -239,11 +261,7 @@ CREATE TABLE `qrtz_calendars` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_calendars
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_cron_triggers
+--  Table structure for `qrtz_cron_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_cron_triggers`;
 CREATE TABLE `qrtz_cron_triggers` (
@@ -257,12 +275,14 @@ CREATE TABLE `qrtz_cron_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_cron_triggers
+--  Records of `qrtz_cron_triggers`
 -- ----------------------------
+BEGIN;
 INSERT INTO `qrtz_cron_triggers` VALUES ('scheduler', 'test1', 'testgroup', '0/5 * * * * ?', 'Asia/Shanghai');
+COMMIT;
 
 -- ----------------------------
--- Table structure for qrtz_fired_triggers
+--  Table structure for `qrtz_fired_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_fired_triggers`;
 CREATE TABLE `qrtz_fired_triggers` (
@@ -283,11 +303,7 @@ CREATE TABLE `qrtz_fired_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_fired_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_job_details
+--  Table structure for `qrtz_job_details`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_job_details`;
 CREATE TABLE `qrtz_job_details` (
@@ -305,12 +321,14 @@ CREATE TABLE `qrtz_job_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_job_details
+--  Records of `qrtz_job_details`
 -- ----------------------------
-INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'test1', 'testgroup', null, 'com.tianyu.jty.system.service.TaskA', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000B7363686564756C654A6F6273720028636F6D2E7469616E79752E6A74792E73797374656D2E656E746974792E5363686564756C654A6F6200000000000000010200064C0009636C6173734E616D657400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000B6465736372697074696F6E71007E00094C000567726F757071007E00094C00046E616D6571007E00094C000673746174757371007E00097870740023636F6D2E7469616E79752E6A74792E73797374656D2E736572766963652E5461736B4174000D302F35202A202A202A202A203F707400097465737467726F75707400057465737431740001317800);
+BEGIN;
+INSERT INTO `qrtz_job_details` VALUES ('scheduler', 'test1', 'testgroup', null, 'com.tianyu.jty.system.service.TaskA', '0', '1', '0', '0', 0xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787001737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000b7363686564756c654a6f6273720028636f6d2e7469616e79752e6a74792e73797374656d2e656e746974792e5363686564756c654a6f6200000000000000010200064c0009636c6173734e616d657400124c6a6176612f6c616e672f537472696e673b4c000e63726f6e45787072657373696f6e71007e00094c000b6465736372697074696f6e71007e00094c000567726f757071007e00094c00046e616d6571007e00094c000673746174757371007e00097870740023636f6d2e7469616e79752e6a74792e73797374656d2e736572766963652e5461736b4174000d302f35202a202a202a202a203f707400097465737467726f75707400057465737431740001317800);
+COMMIT;
 
 -- ----------------------------
--- Table structure for qrtz_locks
+--  Table structure for `qrtz_locks`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_locks`;
 CREATE TABLE `qrtz_locks` (
@@ -320,13 +338,14 @@ CREATE TABLE `qrtz_locks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_locks
+--  Records of `qrtz_locks`
 -- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('scheduler', 'TRIGGER_ACCESS');
+BEGIN;
+INSERT INTO `qrtz_locks` VALUES ('scheduler', 'STATE_ACCESS'), ('scheduler', 'TRIGGER_ACCESS');
+COMMIT;
 
 -- ----------------------------
--- Table structure for qrtz_paused_trigger_grps
+--  Table structure for `qrtz_paused_trigger_grps`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
 CREATE TABLE `qrtz_paused_trigger_grps` (
@@ -336,11 +355,7 @@ CREATE TABLE `qrtz_paused_trigger_grps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_paused_trigger_grps
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_scheduler_state
+--  Table structure for `qrtz_scheduler_state`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_scheduler_state`;
 CREATE TABLE `qrtz_scheduler_state` (
@@ -352,12 +367,14 @@ CREATE TABLE `qrtz_scheduler_state` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_scheduler_state
+--  Records of `qrtz_scheduler_state`
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'tianyu-pc1421978770122', '1421978770298', '15000');
+BEGIN;
+INSERT INTO `qrtz_scheduler_state` VALUES ('scheduler', 'chenjunfeideMacBook-Pro.local1461580382768', '1461581028144', '15000');
+COMMIT;
 
 -- ----------------------------
--- Table structure for qrtz_simple_triggers
+--  Table structure for `qrtz_simple_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simple_triggers`;
 CREATE TABLE `qrtz_simple_triggers` (
@@ -372,11 +389,7 @@ CREATE TABLE `qrtz_simple_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_simple_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_simprop_triggers
+--  Table structure for `qrtz_simprop_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
 CREATE TABLE `qrtz_simprop_triggers` (
@@ -399,11 +412,7 @@ CREATE TABLE `qrtz_simprop_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_simprop_triggers
--- ----------------------------
-
--- ----------------------------
--- Table structure for qrtz_triggers
+--  Table structure for `qrtz_triggers`
 -- ----------------------------
 DROP TABLE IF EXISTS `qrtz_triggers`;
 CREATE TABLE `qrtz_triggers` (
@@ -429,12 +438,14 @@ CREATE TABLE `qrtz_triggers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qrtz_triggers
+--  Records of `qrtz_triggers`
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'test1', 'testgroup', 'test1', 'testgroup', null, '1421206460000', '1421206455000', '5', 'PAUSED', 'CRON', '1421206412000', '0', null, '0', '');
+BEGIN;
+INSERT INTO `qrtz_triggers` VALUES ('scheduler', 'test1', 'testgroup', 'test1', 'testgroup', null, '1459838530000', '1459838525000', '5', 'PAUSED', 'CRON', '1421206412000', '0', null, '0', '');
+COMMIT;
 
 -- ----------------------------
--- Table structure for role
+--  Table structure for `role`
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -448,14 +459,14 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of role
+--  Records of `role`
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', 'admin', 'admin', 'admin', '2', null);
-INSERT INTO `role` VALUES ('5', 'guest', 'guest', 'guest', '3', null);
-INSERT INTO `role` VALUES ('13', 'superadmin', 'superadmin', '超级管理员', '1', null);
+BEGIN;
+INSERT INTO `role` VALUES ('1', 'admin', 'admin', 'admin', '2', null), ('5', 'guest', 'guest', 'guest', '3', null), ('13', 'superadmin', 'superadmin', '超级管理员', '1', null);
+COMMIT;
 
 -- ----------------------------
--- Table structure for role_permission
+--  Table structure for `role_permission`
 -- ----------------------------
 DROP TABLE IF EXISTS `role_permission`;
 CREATE TABLE `role_permission` (
@@ -467,113 +478,17 @@ CREATE TABLE `role_permission` (
   KEY `FK_ROLE_PER_REFERENCE_ROLE` (`ROLE_ID`) USING BTREE,
   CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`PERMISSION_ID`) REFERENCES `permission` (`ID`),
   CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of role_permission
+--  Records of `role_permission`
 -- ----------------------------
-INSERT INTO `role_permission` VALUES ('1', '1', '2');
-INSERT INTO `role_permission` VALUES ('2', '1', '1');
-INSERT INTO `role_permission` VALUES ('28', '5', '1');
-INSERT INTO `role_permission` VALUES ('61', '13', '1');
-INSERT INTO `role_permission` VALUES ('62', '13', '3');
-INSERT INTO `role_permission` VALUES ('63', '13', '16');
-INSERT INTO `role_permission` VALUES ('64', '13', '7');
-INSERT INTO `role_permission` VALUES ('65', '13', '2');
-INSERT INTO `role_permission` VALUES ('66', '13', '4');
-INSERT INTO `role_permission` VALUES ('67', '13', '5');
-INSERT INTO `role_permission` VALUES ('68', '13', '6');
-INSERT INTO `role_permission` VALUES ('69', '13', '12');
-INSERT INTO `role_permission` VALUES ('70', '13', '25');
-INSERT INTO `role_permission` VALUES ('71', '13', '26');
-INSERT INTO `role_permission` VALUES ('72', '13', '27');
-INSERT INTO `role_permission` VALUES ('74', '13', '15');
-INSERT INTO `role_permission` VALUES ('75', '13', '14');
-INSERT INTO `role_permission` VALUES ('76', '13', '20');
-INSERT INTO `role_permission` VALUES ('77', '13', '8');
-INSERT INTO `role_permission` VALUES ('81', '1', '3');
-INSERT INTO `role_permission` VALUES ('88', '1', '12');
-INSERT INTO `role_permission` VALUES ('93', '1', '15');
-INSERT INTO `role_permission` VALUES ('94', '1', '14');
-INSERT INTO `role_permission` VALUES ('95', '1', '20');
-INSERT INTO `role_permission` VALUES ('118', '1', '28');
-INSERT INTO `role_permission` VALUES ('120', '1', '30');
-INSERT INTO `role_permission` VALUES ('121', '1', '31');
-INSERT INTO `role_permission` VALUES ('125', '1', '33');
-INSERT INTO `role_permission` VALUES ('126', '1', '36');
-INSERT INTO `role_permission` VALUES ('127', '1', '35');
-INSERT INTO `role_permission` VALUES ('129', '1', '34');
-INSERT INTO `role_permission` VALUES ('130', '1', '32');
-INSERT INTO `role_permission` VALUES ('133', '5', '15');
-INSERT INTO `role_permission` VALUES ('135', '1', '37');
-INSERT INTO `role_permission` VALUES ('142', '1', '38');
-INSERT INTO `role_permission` VALUES ('145', '1', '40');
-INSERT INTO `role_permission` VALUES ('147', '1', '29');
-INSERT INTO `role_permission` VALUES ('151', '1', '61');
-INSERT INTO `role_permission` VALUES ('152', '1', '62');
-INSERT INTO `role_permission` VALUES ('153', '1', '63');
-INSERT INTO `role_permission` VALUES ('162', '5', '39');
-INSERT INTO `role_permission` VALUES ('164', '5', '58');
-INSERT INTO `role_permission` VALUES ('176', '5', '40');
-INSERT INTO `role_permission` VALUES ('177', '1', '39');
-INSERT INTO `role_permission` VALUES ('178', '1', '58');
-INSERT INTO `role_permission` VALUES ('179', '1', '59');
-INSERT INTO `role_permission` VALUES ('183', '1', '4');
-INSERT INTO `role_permission` VALUES ('184', '1', '6');
-INSERT INTO `role_permission` VALUES ('185', '1', '26');
-INSERT INTO `role_permission` VALUES ('186', '1', '27');
-INSERT INTO `role_permission` VALUES ('187', '1', '5');
-INSERT INTO `role_permission` VALUES ('189', '1', '25');
-INSERT INTO `role_permission` VALUES ('190', '1', '45');
-INSERT INTO `role_permission` VALUES ('191', '1', '7');
-INSERT INTO `role_permission` VALUES ('192', '1', '8');
-INSERT INTO `role_permission` VALUES ('193', '1', '16');
-INSERT INTO `role_permission` VALUES ('194', '13', '28');
-INSERT INTO `role_permission` VALUES ('195', '13', '34');
-INSERT INTO `role_permission` VALUES ('196', '13', '36');
-INSERT INTO `role_permission` VALUES ('197', '13', '29');
-INSERT INTO `role_permission` VALUES ('198', '13', '33');
-INSERT INTO `role_permission` VALUES ('199', '13', '35');
-INSERT INTO `role_permission` VALUES ('200', '13', '30');
-INSERT INTO `role_permission` VALUES ('201', '13', '39');
-INSERT INTO `role_permission` VALUES ('202', '13', '45');
-INSERT INTO `role_permission` VALUES ('203', '13', '58');
-INSERT INTO `role_permission` VALUES ('204', '13', '59');
-INSERT INTO `role_permission` VALUES ('205', '13', '40');
-INSERT INTO `role_permission` VALUES ('206', '13', '61');
-INSERT INTO `role_permission` VALUES ('207', '13', '62');
-INSERT INTO `role_permission` VALUES ('208', '13', '63');
-INSERT INTO `role_permission` VALUES ('209', '13', '31');
-INSERT INTO `role_permission` VALUES ('210', '13', '32');
-INSERT INTO `role_permission` VALUES ('211', '13', '37');
-INSERT INTO `role_permission` VALUES ('212', '13', '38');
-INSERT INTO `role_permission` VALUES ('213', '1', '69');
-INSERT INTO `role_permission` VALUES ('215', '5', '69');
-INSERT INTO `role_permission` VALUES ('216', '5', '20');
-INSERT INTO `role_permission` VALUES ('219', '5', '68');
-INSERT INTO `role_permission` VALUES ('220', '5', '38');
-INSERT INTO `role_permission` VALUES ('221', '1', '70');
-INSERT INTO `role_permission` VALUES ('222', '5', '70');
-INSERT INTO `role_permission` VALUES ('223', '5', '3');
-INSERT INTO `role_permission` VALUES ('227', '5', '29');
-INSERT INTO `role_permission` VALUES ('228', '5', '33');
-INSERT INTO `role_permission` VALUES ('229', '5', '35');
-INSERT INTO `role_permission` VALUES ('231', '5', '2');
-INSERT INTO `role_permission` VALUES ('234', '5', '28');
-INSERT INTO `role_permission` VALUES ('235', '5', '45');
-INSERT INTO `role_permission` VALUES ('236', '5', '59');
-INSERT INTO `role_permission` VALUES ('239', '5', '36');
-INSERT INTO `role_permission` VALUES ('240', '1', '68');
-INSERT INTO `role_permission` VALUES ('241', '1', '71');
-INSERT INTO `role_permission` VALUES ('242', '1', '72');
-INSERT INTO `role_permission` VALUES ('243', '1', '73');
-INSERT INTO `role_permission` VALUES ('244', '1', '74');
-INSERT INTO `role_permission` VALUES ('245', '1', '75');
-INSERT INTO `role_permission` VALUES ('246', '1', '76');
-INSERT INTO `role_permission` VALUES ('247', '1', '77');
+BEGIN;
+INSERT INTO `role_permission` VALUES ('1', '1', '2'), ('2', '1', '1'), ('28', '5', '1'), ('61', '13', '1'), ('62', '13', '3'), ('63', '13', '16'), ('64', '13', '7'), ('65', '13', '2'), ('66', '13', '4'), ('67', '13', '5'), ('68', '13', '6'), ('69', '13', '12'), ('70', '13', '25'), ('71', '13', '26'), ('72', '13', '27'), ('74', '13', '15'), ('75', '13', '14'), ('76', '13', '20'), ('77', '13', '8'), ('81', '1', '3'), ('88', '1', '12'), ('93', '1', '15'), ('94', '1', '14'), ('95', '1', '20'), ('118', '1', '28'), ('120', '1', '30'), ('121', '1', '31'), ('125', '1', '33'), ('126', '1', '36'), ('127', '1', '35'), ('129', '1', '34'), ('130', '1', '32'), ('133', '5', '15'), ('135', '1', '37'), ('142', '1', '38'), ('145', '1', '40'), ('147', '1', '29'), ('151', '1', '61'), ('152', '1', '62'), ('153', '1', '63'), ('162', '5', '39'), ('164', '5', '58'), ('176', '5', '40'), ('177', '1', '39'), ('178', '1', '58'), ('179', '1', '59'), ('183', '1', '4'), ('184', '1', '6'), ('185', '1', '26'), ('186', '1', '27'), ('187', '1', '5'), ('189', '1', '25'), ('190', '1', '45'), ('191', '1', '7'), ('192', '1', '8'), ('193', '1', '16'), ('194', '13', '28'), ('195', '13', '34'), ('196', '13', '36'), ('197', '13', '29'), ('198', '13', '33'), ('199', '13', '35'), ('200', '13', '30'), ('201', '13', '39'), ('202', '13', '45'), ('203', '13', '58'), ('204', '13', '59'), ('205', '13', '40'), ('206', '13', '61'), ('207', '13', '62'), ('208', '13', '63'), ('209', '13', '31'), ('210', '13', '32'), ('211', '13', '37'), ('212', '13', '38'), ('213', '1', '69'), ('215', '5', '69'), ('216', '5', '20'), ('219', '5', '68'), ('220', '5', '38'), ('221', '1', '70'), ('222', '5', '70'), ('223', '5', '3'), ('227', '5', '29'), ('228', '5', '33'), ('229', '5', '35'), ('231', '5', '2'), ('234', '5', '28'), ('235', '5', '45'), ('236', '5', '59'), ('239', '5', '36'), ('240', '1', '68'), ('241', '1', '71'), ('242', '1', '72'), ('243', '1', '73'), ('244', '1', '74'), ('245', '1', '75'), ('246', '1', '76'), ('247', '1', '77'), ('248', '1', '79'), ('249', '1', '80'), ('250', '1', '81'), ('251', '1', '82');
+COMMIT;
 
 -- ----------------------------
--- Table structure for user
+--  Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -598,15 +513,32 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user
+--  Records of `user`
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'admin', '159ae5f48f14e89f3f9f54dc995f1f276d472b54', '3d06a5c14d010804', '2014-03-16 22:44:39', '1', '779205344@qq.com', '123456789', 'aaa', '2014-03-20 14:38:57', '0', null, '131', '2015-01-22 15:51:46', '2015-01-22 16:49:13', null);
-INSERT INTO `user` VALUES ('3', 'tianyu', 'tiany', '1e8df4b59b3a3ab452ed1707ad3cb1a8e63a0630', 'bb2aa40007ad1238', '2014-04-02 00:00:00', '0', '', '300', '', '2014-04-02 11:49:13', '0', null, null, null, null, null);
-INSERT INTO `user` VALUES ('5', 'test', 'tyty11', 'dc6d230074477c8d736bfe0205260e9320565aa6', '94886d7223c80850', '2014-12-05 00:00:00', '1', '', '', null, '2014-12-05 11:55:03', '1', 'ss', '1', null, '2014-12-14 00:09:27', null);
-INSERT INTO `user` VALUES ('6', 'superadmin', '超级管理员', 'df894ac0dd60772f22b5d67fe5d8b04fb4c9188d', '97efb48ee6adff63', '2015-01-15 00:00:00', '1', '779205344@qq.com', '13721035120', null, '2015-01-15 15:55:37', null, '超级管理员', null, null, null, null);
+BEGIN;
+INSERT INTO `user` VALUES ('1', 'admin', 'admin', '159ae5f48f14e89f3f9f54dc995f1f276d472b54', '3d06a5c14d010804', '2014-03-16 22:44:39', '1', '779205344@qq.com', '123456789', 'aaa', '2014-03-20 14:38:57', '0', null, '133', '2016-04-10 11:04:09', '2016-04-10 11:08:15', null), ('3', 'tianyu', 'tiany', '1e8df4b59b3a3ab452ed1707ad3cb1a8e63a0630', 'bb2aa40007ad1238', '2014-04-02 00:00:00', '0', '', '300', '', '2014-04-02 11:49:13', '0', null, null, null, null, null), ('5', 'test', 'tyty11', 'dc6d230074477c8d736bfe0205260e9320565aa6', '94886d7223c80850', '2014-12-05 00:00:00', '1', '', '', null, '2014-12-05 11:55:03', '1', 'ss', '1', null, '2014-12-14 00:09:27', null), ('6', 'superadmin', '超级管理员', 'df894ac0dd60772f22b5d67fe5d8b04fb4c9188d', '97efb48ee6adff63', '2015-01-15 00:00:00', '1', '779205344@qq.com', '13721035120', null, '2015-01-15 15:55:37', null, '超级管理员', null, null, null, null);
+COMMIT;
 
 -- ----------------------------
--- Table structure for user_role
+--  Table structure for `user_org`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_org`;
+CREATE TABLE `user_org` (
+  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `user_id` int(9) NOT NULL,
+  `org_id` int(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `user_org`
+-- ----------------------------
+BEGIN;
+INSERT INTO `user_org` VALUES ('8', '6', '1');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `user_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
@@ -621,65 +553,10 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user_role
+--  Records of `user_role`
 -- ----------------------------
-INSERT INTO `user_role` VALUES ('1', '1', '1');
-INSERT INTO `user_role` VALUES ('19', '3', '5');
-INSERT INTO `user_role` VALUES ('32', '5', '5');
-INSERT INTO `user_role` VALUES ('35', '6', '13');
-INSERT INTO `user_role` VALUES ('36', '6', '1');
--- ----------------------------
--- Table structure for `area_info`
--- ----------------------------
-DROP TABLE IF EXISTS `area_info`;
-CREATE TABLE `area_info` (
-  `ID` int(9) NOT NULL AUTO_INCREMENT,
-  `AREA_CODE` varchar(12) DEFAULT NULL,
-  `AREA_NAME` varchar(50) DEFAULT NULL,
-  `PID` int(9) DEFAULT NULL,
-  `SORT` int(3) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+BEGIN;
+INSERT INTO `user_role` VALUES ('1', '1', '1'), ('19', '3', '5'), ('32', '5', '5'), ('35', '6', '13'), ('36', '6', '1');
+COMMIT;
 
--- ----------------------------
--- Records of area_info
--- ----------------------------
-INSERT INTO `area_info` VALUES ('1', '100000', '中国', null, '1');
-
--- ----------------------------
--- Table structure for `organization`
--- ----------------------------
-DROP TABLE IF EXISTS `organization`;
-CREATE TABLE `organization` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `org_name` varchar(255) NOT NULL,
-  `pid` int(9) DEFAULT NULL,
-  `org_type` varchar(255) DEFAULT NULL,
-  `org_sort` int(3) DEFAULT '0',
-  `org_level` int(3) DEFAULT NULL,
-  `org_code` varchar(255) DEFAULT NULL,
-  `area_id` int(9) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of organization
--- ----------------------------
-INSERT INTO `organization` VALUES ('1', '总部', null, '总部', '1', '1', '000000', null);
-INSERT INTO `organization` VALUES ('2', '12313', '1', '13', '31', '131', '131313', '1');
-
--- ----------------------------
--- Table structure for `user_org`
--- ----------------------------
-DROP TABLE IF EXISTS `user_org`;
-CREATE TABLE `user_org` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `user_id` int(9) NOT NULL,
-  `org_id` int(9) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user_org
--- ----------------------------
-INSERT INTO `user_org` VALUES ('8', '6', '1');
+SET FOREIGN_KEY_CHECKS = 1;
